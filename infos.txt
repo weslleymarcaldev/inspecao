@@ -143,3 +143,66 @@ Acesse no navegador ou via curl:
 curl -X POST http://localhost:8000/analyze \
   -F "file=@/caminho/para/imagem.jpg"
 Lembre-se de testar com uma imagem existente localmente e de garantir que analyze_car_image() funcione corretamente com cv2 + easyocr.
+
+Etapas para subir seu projeto para o GitHub:
+Inicializar o Git (se ainda não tiver feito):
+
+bash
+Copiar código
+git init
+Adicionar todos os arquivos ao controle de versão:
+
+bash
+Copiar código
+git add .
+Criar o primeiro commit:
+
+bash
+Copiar código
+git commit -m "Projeto de inspeção veicular - primeira versão"
+Vincular ao repositório remoto do GitHub:
+
+bash
+Copiar código
+git remote add origin https://github.com/weslleymarcaldev/inspecao.git
+Verificar se a main ou master está configurada como branch padrão:
+
+bash
+Copiar código
+git branch -M main
+Enviar o projeto para o GitHub:
+
+bash
+Copiar código
+git push -u origin main
+📦 Extras recomendados
+Antes de dar o git add, é interessante já garantir:
+
+.gitignore está configurado (evitar subir node_modules, vendor, .env, etc.)
+
+.env e arquivos sensíveis não estão sendo rastreados
+
+Exemplo de .gitignore básico para seu projeto:
+
+gitignore
+Copiar código
+# Node
+node_modules/
+dist/
+.env
+
+# PHP
+vendor/
+.env
+*.log
+
+# Python
+__pycache__/
+*.pyc
+
+# IDEs
+.vscode/
+.idea/
+
+# Docker
+docker/mysql/data/
