@@ -1,0 +1,83 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "view": "View",
+    "search": "Search",
+    "filter": "Filter",
+    "clear": "Clear",
+    "submit": "Submit",
+    "close": "Close",
+    "confirm": "Confirm",
+    "actions": "Actions"
+  },
+  "navigation": {
+    "dashboard": "Dashboard",
+    "inspections": "Inspections",
+    "newInspection": "New Inspection",
+    "uploadImage": "Upload Image",
+    "logout": "Logout"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "totalInspections": "Total Inspections",
+    "pendingInspections": "Pending Inspections",
+    "completedInspections": "Completed Inspections",
+    "recentInspections": "Recent Inspections"
+  },
+  "inspections": {
+    "title": "Inspections List",
+    "newInspection": "New Inspection",
+    "plate": "Plate",
+    "company": "Company",
+    "vehicleType": "Vehicle Type",
+    "status": "Status",
+    "createdAt": "Created at",
+    "noInspections": "No inspections found",
+    "filterByStatus": "Filter by status",
+    "filterByDate": "Filter by date",
+    "filterByPlate": "Filter by plate",
+    "statusPending": "Pending",
+    "statusInProgress": "In Progress",
+    "statusCompleted": "Completed"
+  },
+  "newInspection": {
+    "title": "New Inspection",
+    "selectCompany": "Select Company",
+    "selectVehicleType": "Select Vehicle Type",
+    "selectCategory": "Select Category",
+    "plateNumber": "Plate Number",
+    "observations": "Observations",
+    "createInspection": "Create Inspection",
+    "success": "Inspection created successfully!",
+    "error": "Error creating inspection"
+  },
+  "uploadImage": {
+    "title": "Upload Image",
+    "selectInspection": "Select Inspection",
+    "dragDropFiles": "Drag and drop files here or click to select",
+    "uploadProgress": "Upload Progress",
+    "uploadSuccess": "Upload successful!",
+    "uploadError": "Upload error",
+    "analyzing": "Analyzing image...",
+    "plateRecognized": "Plate recognized",
+    "angleDetected": "Angle detected",
+    "damageDetected": "Damage detected"
+  },
+  "validation": {
+    "required": "This field is required",
+    "invalidEmail": "Invalid email",
+    "minLength": "Minimum {{count}} characters",
+    "invalidPlate": "Invalid plate"
+  },
+  "api": {
+    "error": "Server communication error",
+    "networkError": "Connection error",
+    "unauthorized": "Unauthorized",
+    "forbidden": "Access denied",
+    "notFound": "Resource not found"
+  }
+}

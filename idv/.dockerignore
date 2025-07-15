@@ -1,0 +1,12 @@
+node_modules
+vendor
+__pycache__
+.git
+.env
+*.pyc
+*.zip
+*.png
+*.jpg
+*.jpeg
+mysql
+docker/mysql/data

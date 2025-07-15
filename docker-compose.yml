@@ -1,0 +1,68 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: BD_mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: idv
+      MYSQL_USER: weslley
+      MYSQL_PASSWORD: kuo8jli79
+    volumes:
+      - mysql_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  ci4:
+    build:
+      context: ./idv
+      dockerfile: Dockerfile
+    container_name: CI4
+    command: sh -c "php spark serve --host=0.0.0.0 --port=8080"
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./idv:/var/www/html
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    container_name: python-API
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./api:/app
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+
+  front:
+    build:
+      context: ./front
+      dockerfile: Dockerfile
+    container_name: react-front
+    command: sh -c "npm install && npx vite --host 0.0.0.0 --port 5173"
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./front:/app
+      - /app/node_modules
+    depends_on:
+      ci4:
+        condition: service_started
+      api:
+        condition: service_healthy
+
+volumes:
+  mysql_data:

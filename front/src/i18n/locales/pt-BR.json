@@ -1,0 +1,83 @@
+{
+  "common": {
+    "loading": "Carregando...",
+    "save": "Salvar",
+    "cancel": "Cancelar",
+    "delete": "Excluir",
+    "edit": "Editar",
+    "view": "Visualizar",
+    "search": "Pesquisar",
+    "filter": "Filtrar",
+    "clear": "Limpar",
+    "submit": "Enviar",
+    "close": "Fechar",
+    "confirm": "Confirmar",
+    "actions": "Ações"
+  },
+  "navigation": {
+    "dashboard": "Dashboard",
+    "inspections": "Inspeções",
+    "newInspection": "Nova Inspeção",
+    "uploadImage": "Upload de Imagem",
+    "logout": "Sair"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "totalInspections": "Total de Inspeções",
+    "pendingInspections": "Inspeções Pendentes",
+    "completedInspections": "Inspeções Concluídas",
+    "recentInspections": "Inspeções Recentes"
+  },
+  "inspections": {
+    "title": "Lista de Inspeções",
+    "newInspection": "Nova Inspeção",
+    "plate": "Placa",
+    "company": "Empresa",
+    "vehicleType": "Tipo de Veículo",
+    "status": "Status",
+    "createdAt": "Criado em",
+    "noInspections": "Nenhuma inspeção encontrada",
+    "filterByStatus": "Filtrar por status",
+    "filterByDate": "Filtrar por data",
+    "filterByPlate": "Filtrar por placa",
+    "statusPending": "Pendente",
+    "statusInProgress": "Em Andamento",
+    "statusCompleted": "Concluída"
+  },
+  "newInspection": {
+    "title": "Nova Inspeção",
+    "selectCompany": "Selecionar Empresa",
+    "selectVehicleType": "Selecionar Tipo de Veículo",
+    "selectCategory": "Selecionar Categoria",
+    "plateNumber": "Número da Placa",
+    "observations": "Observações",
+    "createInspection": "Criar Inspeção",
+    "success": "Inspeção criada com sucesso!",
+    "error": "Erro ao criar inspeção"
+  },
+  "uploadImage": {
+    "title": "Upload de Imagem",
+    "selectInspection": "Selecionar Inspeção",
+    "dragDropFiles": "Arraste e solte arquivos aqui ou clique para selecionar",
+    "uploadProgress": "Progresso do Upload",
+    "uploadSuccess": "Upload realizado com sucesso!",
+    "uploadError": "Erro ao fazer upload",
+    "analyzing": "Analisando imagem...",
+    "plateRecognized": "Placa reconhecida",
+    "angleDetected": "Ângulo detectado",
+    "damageDetected": "Danos detectados"
+  },
+  "validation": {
+    "required": "Este campo é obrigatório",
+    "invalidEmail": "Email inválido",
+    "minLength": "Mínimo de {{count}} caracteres",
+    "invalidPlate": "Placa inválida"
+  },
+  "api": {
+    "error": "Erro na comunicação com o servidor",
+    "networkError": "Erro de conexão",
+    "unauthorized": "Não autorizado",
+    "forbidden": "Acesso negado",
+    "notFound": "Recurso não encontrado"
+  }
+}

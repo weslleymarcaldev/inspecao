@@ -1,0 +1,145 @@
+Configuração geral da app	     php spark config:check App
+Conexão com banco	             php spark config:check Database
+Sessões	                       php spark config:check Session
+Logger	                       php spark config:check Logger
+Encriptação	                   php spark config:check Encryption
+E-mail	                       php spark config:check Email
+
+
+chmod +x install.sh
+./install.sh
+
+
+# Testar com cURL ou Postman
+Enviar imagem para o endpoint:
+
+curl -X POST http://localhost:8000/analyze \
+  -F "file=@/caminho/para/sua/imagem.jpg"
+
+Postman:
+
+Método: POST
+URL: http://localhost:8000/analyze
+Body: form-data
+Key: file (type: File)
+Value: selecione uma imagem real
+
+
+# Ambiente virtual Python ativado, geralmente criado com:
+python -m venv venv
+
+E ativado com:
+source venv/bin/activate       # Linux/macOS
+.\venv\Scripts\activate        # Windows
+
+# Limpar tudo
+No terminal, rode:
+# 1. Parar e remover volumes
+docker-compose down -v --remove-orphans
+# 2. Deletar pasta mysql quebrada
+rm -rf mysql
+# 3. Limpar cache do builder
+docker builder prune -af
+
+## 📡 Serviços:
+Serviço	       Porta	    Acesso
+CI4 (API)	     8080	      http://localhost:8080
+Python API	   8000	      http://localhost:8000/analyze
+React SPA	     5173	      http://localhost:5173
+MySQL	         3306	      (padrão local para o banco)
+
+## 🛠️ Comandos úteis
+# Parar e limpar tudo (inclusive volumes)
+docker-compose down -v --remove-orphans
+
+# Limpar cache de builds antigos
+docker builder prune -af
+
+# Subir os containers com rebuild
+docker-compose up --build
+
+
+como funciona a **comunicação entre as três partes do seu projeto**:
+
+## 🧩 Estrutura Geral
+
+Supondo que você tenha este layout de diretórios no seu projeto:
+
+```
+/API   → API de inteligência artificial (FastAPI em Python)
+/idv   → Backend (CodeIgniter 4 em PHP)
+/front → Frontend (React)
+```
+
+---
+
+## 🔁 Fluxo de Comunicação entre os Módulos
+
+### 1. **Frontend (`/front`) → Backend (`/idv`)**
+
+* O React (frontend) faz chamadas HTTP via `axios` para as rotas da API REST que o CodeIgniter expõe.
+* Por padrão, as chamadas são feitas para `http://localhost:8080/api/...`
+* Exemplo: `GET /api/inspections`, `POST /api/inspections`, `POST /api/analyze/:id`
+
+```js
+axios.get('http://localhost:8080/api/inspections')
+```
+
+**➡ O backend (`idv`) precisa estar rodando no `localhost:8080`.**
+
+---
+
+### 2. **Backend (`/idv`) → API Python (`/API`)**
+
+* Quando o CodeIgniter precisa realizar análise de imagem, ele faz uma requisição `POST` com a imagem para a FastAPI.
+* Exemplo no `AnalysisController`:
+
+```php
+$response = $client->request('POST', 'http://localhost:8000/analyze', [...]);
+```
+
+**➡ A API Python (FastAPI) precisa estar rodando no `localhost:8000`.**
+
+---
+
+### 3. **Resumo Visual do Fluxo**
+
+```plaintext
+[ Usuário no navegador (React) ]
+            |
+            | 1️⃣ Axios
+            ↓
+[ Backend PHP (CodeIgniter 4 - /idv) ]
+            |
+            | 2️⃣ cURL (ou Guzzle) para análise de imagem
+            ↓
+[ API Python (FastAPI - /API) ]
+```
+
+---
+
+## 🧪 Exemplo prático:
+
+Quando o usuário faz **upload de uma imagem** no frontend:
+
+1. 🔼 O `UploadImage.jsx` envia o arquivo para `http://localhost:8080/api/inspections/upload-image`.
+2. 📁 O CodeIgniter salva o arquivo no `WRITEPATH`.
+3. 📤 O controller `AnalysisController` envia esse arquivo via `cURL` para `http://localhost:8000/analyze`.
+4. 🧠 A API Python retorna os dados analisados: placa, dano, ângulo, etc.
+5. 💾 O CodeIgniter salva os dados no banco e responde ao frontend.
+
+---
+
+## 🔒 CORS (se necessário)
+
+Se o frontend estiver hospedado em uma porta diferente, é preciso:
+
+* **No backend (CodeIgniter)**: permitir requisições CORS vindas do frontend.
+* **Na API Python (FastAPI)**: adicionar CORS middleware para aceitar requisições do backend.
+
+Testando se a API responde:
+Acesse no navegador ou via curl:
+
+curl -X POST http://localhost:8000/analyze \
+  -F "file=@/caminho/para/imagem.jpg"
+Lembre-se de testar com uma imagem existente localmente e de garantir que analyze_car_image() funcione corretamente com cv2 + easyocr.

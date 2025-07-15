@@ -1,0 +1,1 @@
+// migration simplificada omitida por brevidade
