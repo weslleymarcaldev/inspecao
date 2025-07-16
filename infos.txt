@@ -206,3 +206,14 @@ __pycache__/
 
 # Docker
 docker/mysql/data/
+
+##venv
+
+- Desativar o venv
+deactivate
+
+- Ativar o venv
+source venv/Scripts/activate   # No Git Bash / Windows
+
+- excluir completamente o venv, aí sim você faria:
+rm -rf venv/
